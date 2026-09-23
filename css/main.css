@@ -1104,6 +1104,16 @@ strong {
     top: calc(var(--nav-h) + 18px);
   } /* a bit of gap below the white bar */
   .home__sticky-title { max-width: none; }  /* title sits below the bar, not beside the brand */
+  /* narrow screens: long categories don't fit beside the title, so stack them
+     (title on top, category below) instead of squeezing the title to zero width */
+  .home__sticky {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .home__sticky-cat {
+    flex-shrink: 1;
+    text-align: left;
+  }
   .home__media {
     height: 74vh;
   }

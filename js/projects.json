@@ -1,0 +1,338 @@
+{
+    "profile": {
+        "name": "Federica Sorba",
+        "cv": "#",
+        "email": "hello@federicasorba.art",
+        "instagram": "https://www.instagram.com/federicasorba/",
+        "linkedin": "https://www.linkedin.com/in/federica-sorba-82b40a173/",
+        "instagramHandle": "@federicasorba",
+        "infoImage": "assets/img/portrait_2026.webp",
+        "bioFile": "content/bio.md",
+        "cvFile": "content/cv.json",
+        "calendarFile": "content/calendar.md",
+        "pressFile": "content/press.md"
+    },
+    "projects": [
+        {
+            "id": "tempo-organico",
+            "title": "Tempo Organico",
+            "subtitle": "Seminaria Sogni in Terra - Land Art Biennale",
+            "indexType": "visual design",
+            "selected": true,
+            "index": 5,
+            "medium": "Live AV Installation and Performance",
+            "role": "Visual design <a href='https://novamediastudio.co/'>NOVA Media Studio</a> ",
+            "agency": "Nova Media Studio",
+            "agencyUrl": "https://novamediastudio.co/",
+            "year": "2025",
+            "deliverables": "Visual Design, Projection Mapping, Installation and Performance",
+            "descriptionFile": "content/tempo_organico.md",
+            "cover": "assets/img/tempo_organico/tempo_organico_cover.gif",
+            "videos": [
+                "https://www.youtube.com/watch?v=kOvj9z5mSDw"
+            ]
+        },
+        {
+            "id": "moon-landing",
+            "title": "What is Fake About Moon Landing",
+            "subtitle": "",
+            "indexType": "Editorial",
+            "medium": "Editorial Book",
+            "role": "Art Director, Editorial Designer",
+            "deliverables": "Pamphlet",
+            "year": "2019",
+            "descriptionFile": "content/moon_landing.md",
+            "cover": "assets/img/moon_landing/moon_landing_cover.webp",
+            "images": [
+                "assets/img/moon_landing/moon_landing_1.webp",
+                "assets/img/moon_landing/moon_landing_2.webp",
+                "assets/img/moon_landing/moon_landing_3.webp",
+                "assets/img/moon_landing/moon_landing_4.webp",
+                "assets/img/moon_landing/moon_landing_cover.webp"
+            ]
+        },
+        {
+            "id": "brewing",
+            "title": "Brewing a Better World",
+            "subtitle": "The Responsible Coffee's Lover Guide",
+            "indexType": "Graphic Design",
+            "selected": true,
+            "index": 10,
+            "medium": "Toolkit",
+            "role": "Art Direction, Editorial Designer, Illustrator @ The New Gastronome Agency",
+            "year": "2023",
+            "deliverables": "Digital and Editorial Toolkit",
+            "descriptionFile": "content/brewing.md",
+            "client": "Slow Food Coffee Coalition",
+            "cover": "assets/img/brewing/brewing_cover.webp",
+            "images": [
+                "assets/img/brewing/brewing_6.webp",
+                "assets/img/brewing/brewing_7.webp",
+                {
+                    "src": "assets/img/brewing/brewing_2.webp",
+                    "full": true
+                },
+                "assets/img/brewing/brewing_8.webp",
+                "assets/img/brewing/brewing_9.webp",
+                "assets/img/brewing/brewing_10.webp",
+                "assets/img/brewing/brewing_11.webp",
+                "assets/img/brewing/brewing_1.webp"
+            ]
+        },
+        {
+            "id": "harara",
+            "title": "Harara",
+            "subtitle": "The Black Issue Outtakes",
+            "indexType": "Editorial",
+            "selected": true,
+            "medium": "Editorial Fanzine",
+            "role": "Art Direction, Editorial, Type & Infographic Designer",
+            "year": "2019",
+            "deliverables": "Fanzine",
+            "descriptionFile": "content/harara.md",
+            "cover": "assets/img/harara/harara_cover.gif",
+            "images": [
+                "assets/img/harara/harara_1.webp",
+                "assets/img/harara/harara_2.webp",
+                "assets/img/harara/harara_3.webp",
+                "assets/img/harara/harara_4.webp",
+                "assets/img/harara/harara_5.webp",
+                "assets/img/harara/harara_6.webp",
+                "assets/img/harara/harara_7.webp",
+                "assets/img/harara/harara_8.webp",
+                "assets/img/harara/harara_9.webp",
+                "assets/img/harara/harara_10.webp",
+                "assets/img/harara/harara_11.gif"
+            ]
+        },
+        {
+            "id": "baby-gastronome",
+            "title": "Baby Gastronome",
+            "subtitle": "The New Gastronome Magazine",
+            "indexType": "Editorial",
+            "selected": true,
+            "index": 7,
+            "medium": "Editorial Magazine",
+            "role": "Editorial Designer and Illustrator @ The New Gastronome Agency",
+            "year": "2023",
+            "descriptionFile": "content/baby_gastronome.md",
+            "cover": "assets/img/baby_gastronome/baby_gastronome_cover.webp",
+            "images": [
+                "assets/img/baby_gastronome/baby_gastronome_4.webp",
+                "assets/img/baby_gastronome/baby_gastronome_3.webp",
+                "assets/img/baby_gastronome/baby_gastronome_8.webp",
+                "assets/img/baby_gastronome/baby_gastronome_7.webp",
+                "assets/img/baby_gastronome/baby_gastronome_10.webp"
+            ]
+        },
+        {
+            "id": "twenty-years-anniversary-pollenzo",
+            "title": "Ventennale di Pollenzo",
+            "subtitle": "Brand Identity for the Twentieth Year Anniversary of University of Gastronomic Sciences in Pollenzo",
+            "indexType": "Graphic Design",
+            "selected": true,
+            "index": 6,
+            "medium": "Brand Identity",
+            "role": "Graphic Design @ The New Gastronome Agency",
+            "year": "2024",
+            "descriptionFile": "content/twenty_years.md",
+            "cover": "assets/img/twenty_years/twenty_years_cover.webp",
+            "images": [
+                "assets/img/twenty_years/twenty_years_6.webp",
+                "assets/img/twenty_years/twenty_years_7.gif",
+                "assets/img/twenty_years/twenty_years_8.webp",
+                "assets/img/twenty_years/twenty_years_9.webp"
+            ]
+        },
+        {
+            "id": "santaromero",
+            "title": "Santa Romero",
+            "subtitle": "A poster design",
+            "indexType": "Illustration",
+            "medium": "Poster design",
+            "role": "Editorial Designer and Illustrator @ The New Gastronome Agency",
+            "year": "2023",
+            "descriptionFile": "content/santaromero.md",
+            "cover": "assets/img/santaromero/santaromero_3.webp"
+        },
+        {
+            "id": "inked_gastronomy",
+            "title": "Inked Gastronomy",
+            "subtitle": "An ongoing collection of hand-inked illustrations of raw ingredients, botanical details, and culinary objects.",
+            "indexType": "Illustration",
+            "medium": "Illustrations",
+            "role": "Illustrator @ freelancing",
+            "year": "Ongoing",
+            "descriptionFile": "content/inked_gastronomy.md",
+            "cover": "assets/img/inked_gastronomy/inked_gastronomy_cover.webp",
+            "images": [
+                {
+                    "src": "assets/img/inked_gastronomy/inked_gastronomy_5.webp",
+                    "credit": "Slow Food Coffee Coalition – drawing"
+                },
+                {
+                    "src": "assets/img/inked_gastronomy/inked_gastronomy_6.webp",
+                    "credit": "Slow Food Coffee Coalition – final color"
+                },
+                {
+                    "src": "assets/img/inked_gastronomy/inked_gastronomy_7.webp",
+                    "credit": "Slow Food Coffee Coalition – drawing"
+                },
+                {
+                    "src": "assets/img/inked_gastronomy/inked_gastronomy_8.webp",
+                    "credit": "Slow Food Coffee Coalition – final color"
+                },
+                {
+                    "src": "assets/img/inked_gastronomy/inked_gastronomy_10.webp",
+                    "credit": "Sardine realized "
+                },
+                {
+                    "src": "assets/img/inked_gastronomy/inked_gastronomy_11.webp",
+                    "credit": "Mushroom – Sketch fot the tattoo"
+                },
+                {
+                    "src": "assets/img/inked_gastronomy/inked_gastronomy_12.webp",
+                    "credit": "Mushroom realized "
+                },
+                {
+                    "src": "assets/img/inked_gastronomy/inked_gastronomy_13.webp",
+                    "credit": "Mushroom – Sketch fot the tattoo"
+                },
+                {
+                    "src": "assets/img/inked_gastronomy/inked_gastronomy_14.webp",
+                    "credit": "Mushroom – Sketch fot the tattoo"
+                },
+                {
+                    "src": "assets/img/inked_gastronomy/inked_gastronomy_15.webp",
+                    "credit": "Mushroom – Sketch fot the tattoo"
+                }
+            ]
+        },
+        {
+            "id": "sincronia",
+            "title": "Sincronia",
+            "subtitle": "Seminaria Sogni in Terra - Land Art Biennale",
+            "indexType": "visual design",
+            "selected": true,
+            "index": 1,
+            "medium": "Projection Mapping and Live AV Installation",
+            "role": "Visual design <a href='https://novamediastudio.co/'>NOVA Media Studio</a> ",
+            "agency": "Italian Institute of Culture in Nairobi, Italian Embassy of Kenya",
+            "agencyUrl": "https://novamediastudio.co/",
+            "year": "2026",
+            "deliverables": "Visual Design, Projection Mapping, Installation and Performance",
+            "descriptionFile": "content/sincronia.md",
+            "cover": "assets/img/sincronia/sincronia_9.gif",
+            "videos": [
+                "https://www.youtube.com/watch?v=4F41CLEMr04"
+            ]
+        },
+        {
+            "id": "dreaming",
+            "title": "Dreaming",
+            "subtitle": "A Visual Live inside Reggia di Venaria",
+            "indexType": "visual design",
+            "selected": true,
+            "index": 2,
+            "medium": "Projection Mapping and Live AV Installation",
+            "role": "Visual design <a href='https://novamediastudio.co/'>NOVA Media Studio</a> ",
+            "agency": "Club Silencio",
+            "agencyUrl": "https://novamediastudio.co/",
+            "year": "2024",
+            "deliverables": "Visual Design, Projection Mapping, Installation and Performance",
+            "descriptionFile": "content/venaria.md",
+            "cover": "assets/img/venaria/novamedia_venaria_cover.gif",
+            "videos": [
+                "https://www.youtube.com/watch?v=4F41CLEMr04"
+            ]
+        },
+        {
+            "id": "ogr",
+            "title": "Beyond the Portal",
+            "subtitle": "A Visual Live inside OGR",
+            "indexType": "visual design",
+            "selected": true,
+            "index": 3,
+            "medium": "Projection Mapping and Live AV Installation",
+            "role": "Visual design <a href='https://novamediastudio.co/'>NOVA Media Studio</a> ",
+            "agency": "Club Silencio",
+            "agencyUrl": "https://novamediastudio.co/",
+            "year": "2024",
+            "deliverables": "Visual Design, Projection Mapping, Installation and Performance",
+            "descriptionFile": "content/ogr.md",
+            "cover": "assets/img/ogr/novamedia_ogr_cover.gif",
+            "videos": [
+                "https://www.youtube.com/watch?v=y6EuJrFFnlQ"
+            ]
+        },
+        {
+            "id": "workshop-mapping",
+            "title": "Workshop Projection Mapping",
+            "subtitle": "A Visual Live inside OGR",
+            "indexType": "workshops",
+            "selected": true,
+            "index": 4,
+            "medium": "3-days workshop lessons",
+            "role": "Visual design <a href='https://novamediastudio.co/'>NOVA Media Studio</a> ",
+            "agency": "Recontemporary",
+            "agencyUrl": "https://novamediastudio.co/",
+            "year": "2025",
+            "deliverables": "Visual Design, Projection Mapping, Installation and Performance",
+            "descriptionFile": "content/workshop_map.md",
+            "cover": "assets/img/workshop_rec/novamedia_workshop_cover.gif",
+            "videos": [
+                "https://www.youtube.com/watch?v=y6EuJrFFnlQ"
+            ]
+        },
+        {
+            "id": "artico",
+            "title": "Artico Club",
+            "subtitle": "A visual design in a foyer of a theater ",
+            "indexType": "visual design",
+            "selected": true,
+            "index": 4,
+            "medium": "3-days workshop lessons",
+            "role": "Visual design <a href='https://novamediastudio.co/'>NOVA Media Studio</a> ",
+            "agency": "Recontemporary",
+            "agencyUrl": "https://novamediastudio.co/",
+            "year": "2025",
+            "deliverables": "Visual Design, Projection Mapping, Installation and Performance",
+            "descriptionFile": "content/artico.md",
+            "cover": "assets/img/workshop_rec/novamedia_workshop_cover.gif",
+            "videos": [
+                "https://www.youtube.com/watch?v=y6EuJrFFnlQ"
+            ]
+        },
+        {
+            "id": "schwarze-materie",
+            "title": "Schwarze Materie",
+            "subtitle": "DARK opening reinterpretation",
+            "indexType": "explorations",
+            "medium": "Generative Studies",
+            "role": "Author",
+            "year": "2022",
+            "descriptionFile": "content/schwarze_materie.md",
+            "deliverables": "An ongoing series of small generative sketches",
+            "description": "Field Notes is an open-ended series of small generative studies — daily experiments with form, motion and randomness. Each sketch is a note to self, a way of thinking through a technique or an image before it grows into something larger.",
+            "cover": "assets/img/schwarze_materie/schwarze_materie_cover.gif"
+        },
+        {
+            "id": "night-forms",
+            "title": "Night Forms",
+            "subtitle": "Studies in Light",
+            "indexType": "explorations",
+            "medium": "Real-time Graphics",
+            "role": "Author",
+            "year": "2024",
+            "deliverables": "A collection of real-time shaders and light studies",
+            "description": "Night Forms collects real-time experiments with light, colour and depth. Built as shaders that run live in the browser, the studies explore how simple rules can produce atmospheres — dusk, glow, drift — that feel almost photographic.",
+            "cover": "assets/img/night-forms-cover.svg",
+            "images": [
+                "assets/img/night-forms-1.svg",
+                "assets/img/night-forms-2.svg",
+                "assets/img/night-forms-3.svg",
+                "assets/img/night-forms-4.svg"
+            ]
+        }
+    ]
+}

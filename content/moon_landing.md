@@ -1,0 +1,1 @@
+A book that archives documents on the moon landing macrotheme, with the consequent television speculation and the conspiracy theories of the Internet in the 60's — USA and Russia during the cold war showed the symbolization and the politicization given by mass culture At that time about the topic of the space race.

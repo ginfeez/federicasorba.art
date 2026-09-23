@@ -1,0 +1,1132 @@
+@import url("../fonts/stylesheet.css");
+
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --accent: #8a8a8a;
+  --muted: #8a8a8a;
+  --sub: #666666;
+  --line: #e2e2e2;
+  --nav-h: 44px;
+  --pad: 22px;
+  --home-gap: clamp(
+    22px,
+    6vh,
+    10vh
+  ); /* landing top margin before artwork goes full-page */
+  --home-left: 61%; /* width of the artwork column; bio + right-nav share the rest */
+  --brand-x: clamp(120px, 15vw, 260px); /* left offset of the FEDERICA SORBA brand */
+  --bio-indent: 5.5em; /* first-line indent of the homepage bio (set 0 for none) */
+  --nav-left-color: #fff; /* brand: inverts over the artwork (mix-blend) */
+  --nav-right-color: var(
+    --bg
+  ); /* nav column: solid colour, aligned with the bio */
+  --maxw: 2200px;
+  --font: "Neue Haas Grotesk Display Pro", sans-serif;
+
+  /* body copy — shared by the bio (home + info) and the project description */
+  --font-body: var(--font);
+  --fs-body: clamp(18px, 1.1vw, 16px);
+
+  /* ---- type scale : edit these to tune every part of the site ---- */
+  --fs-base: 18px; /* body default */
+  --line-height: 1.1;
+
+  /* header / nav */
+  --fs-nav: 18px; /* nav links + brand + social (desktop) */
+  --fs-nav-mobile: 18px; /* nav links + social (mobile menu) */
+
+  /* homepage */
+  --fs-home-label: 18px; /* sticky project title + category */
+  --fs-home-view: 12px; /* "View" hover hint */
+  --fs-home-bio: clamp(18px, 1vw, 22px); /* right-column bio */
+
+  /* project detail */
+  --fs-detail-title: clamp(30px, 4.4vw, 58px);
+  --fs-detail-meta-label: 18px; /* Medium / Role / Year labels */
+  --fs-detail-meta-value: 15px; /* their values */
+  --fs-detail-desc: clamp(14px, 1.5vw, 17px);
+  --fs-detail-nav: 15px; /* prev / index / next */
+
+  /* works grid */
+  --fs-section-heading: clamp(
+    30px,
+    4.4vw,
+    30px
+  ); /* group headings (Graphic Design…) */
+  --fs-card-title: clamp(24px, 3.5vw, 28px);
+  --fs-card-sub: 15px; /* card subtitle */
+  --fs-card-meta: 15px; /* card medium — year */
+  --fs-card-view: 15px; /* card "View" hover hint */
+
+  /* info / about */
+  --fs-info-bio: clamp(18px, 1vw, 22px);
+
+  /* footer */
+  --fs-footer: 11px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--fg);
+  background: var(--bg);
+  font-size: var(--fs-base);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent);
+}
+
+sup {
+  font-size: 0.65em;
+  vertical-align: super;
+}
+
+/* markdown **bold** -> <strong>; use the site's medium weight, not full bold */
+strong {
+  font-weight: 500;
+}
+
+/* -------------------------------------------------- nav
+   The header is split into two INDEPENDENT fixed pieces so each can align and
+   colour separately:
+   - .nav__brand (left)  overlays the artwork and inverts against it (mix-blend)
+   - .nav__right (right) is its own column, aligned to the bio, with a solid colour
+   .nav itself is display:contents so it creates no stacking context — that lets
+   the brand's blend reach the artwork behind the header. */
+.nav {
+  display: contents;
+  font-size: var(--fs-nav);
+  letter-spacing: 0.02em;
+}
+
+/* brand: indented so the far-left stays free for the sticky project title */
+.nav__brand {
+  position: fixed;
+  top: 0;
+  left: var(--brand-x);
+  height: var(--nav-h);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  font-size: var(--fs-nav);
+  font-weight: 400;
+  white-space: nowrap;
+  color: var(--nav-left-color);
+  mix-blend-mode: difference;
+}
+
+/* nav column: fixed, left edge aligned to the bio column, solid colour */
+.nav__right {
+  position: fixed;
+  top: 0;
+  left: var(--home-left);
+  right: 0;
+  height: var(--nav-h);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 48px);
+  padding: 0 var(--pad);
+  font-size: var(--fs-nav);
+  color: var(--nav-left-color);
+  mix-blend-mode: difference;
+}
+
+/* let the links sit directly in nav__right so they distribute evenly */
+.nav__links {
+  display: contents;
+}
+
+.nav__links a {
+  position: relative;
+  transition: opacity 0.2s;
+}
+.nav__links a.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: currentColor;
+}
+.nav__count {
+  margin-left: 1px;
+}
+
+.nav__social {
+  display: flex;
+  gap: 6px;
+  white-space: nowrap;
+  color: var(--nav-right-color);
+  mix-blend-mode: difference;
+}
+
+.nav__toggle {
+  position: fixed;
+  top: 0;
+  right: var(--pad);
+  height: var(--nav-h);
+  z-index: 101;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+.nav__toggle span {
+  width: 22px;
+  height: 1.5px;
+  background: currentColor;
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
+}
+.nav.is-open .nav__toggle span:nth-child(1) {
+  transform: translateY(3.5px) rotate(45deg);
+}
+.nav.is-open .nav__toggle span:nth-child(2) {
+  transform: translateY(-3px) rotate(-45deg);
+}
+
+/* -------------------------------------------------- app / layout */
+.app {
+  padding-top: var(--nav-h);
+  min-height: 100vh;
+}
+
+.loading {
+  padding: 40vh var(--pad);
+  text-align: center;
+  color: var(--muted);
+}
+
+/* always pinned to the bottom-right, over the content — no in-flow end bar */
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 90;
+  padding: 10px var(--pad);
+  font-size: var(--fs-footer);
+  color: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+/* -------------------------------------------------- home: split (works left, bio right) */
+.home {
+  display: grid;
+  grid-template-columns: var(--home-left) 1fr; /* left edge of col 2 == start of right-nav */
+  align-items: start;
+  /* landing: everything sits a margin below the header; this whitespace simply
+     scrolls away, after which each 100vh image fills the page under the header */
+  padding-top: var(--home-gap);
+}
+.home__stack {
+  order: 1;
+  min-width: 0;
+}
+/* bio is truly fixed (not sticky) so it never jitters while the left scrolls.
+   It occupies the right column: left edge == the artwork column boundary. */
+.home__intro {
+  text-justify: inline;
+  position: fixed;
+  top: calc(var(--nav-h) + var(--home-gap));
+  left: var(--home-left);
+  right: 0;
+  padding: 0px var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.home__intro-bio {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--line-height);
+  text-align: justify;
+}
+/* first-line indent of the bio — tune (or zero out) with --bio-indent below */
+.home__intro-bio > p:first-child {
+  text-indent: var(--bio-indent);
+}
+
+.home__intro-contact a {
+  display: block;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-bottom: 3px;
+}
+
+.home__item {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid var(--line);
+  background: #0a0a0a;
+}
+
+/* sticky label: pinned on the HEADER line for each project. It has a real
+   height and the image is pulled up beneath it, so when the next project
+   arrives its label PUSHES this one off the top (no overlap) — the title
+   effectively stops at the bottom of its own image. Blend is on the sticky
+   element itself so it inverts against the artwork behind it. */
+.home__sticky {
+  position: sticky;
+  top: 0; /* aligns with the header row */
+  height: var(--nav-h); /* real height so the NEXT label pushes this one off */
+  z-index: 6;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;   /* first line sits at a fixed start; wrapped lines flow downward */
+  gap: 16px;
+  /* padding-top centres a single line in the band; extra lines overflow down over the image */
+  padding: calc((var(--nav-h) - 1.05em) / 2) var(--pad) 0;
+  pointer-events: none;
+  color: #fff;
+  mix-blend-mode: difference; /* invert against the artwork, always readable */
+  font-size: var(--fs-home-label);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+/* long titles wrap onto a new line instead of overlapping the category */
+.home__sticky-title {
+  min-width: 0;
+  /* wrap before reaching the brand so long titles never overlap it */
+  max-width: calc(var(--brand-x) - var(--pad) - 16px);
+}
+.home__sticky-cat { flex-shrink: 0; text-align: right; }
+
+.home__media {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100vh;
+  min-height: 460px;
+  margin-top: calc(
+    -1 * var(--nav-h)
+  ); /* slide up under the label to overlay it — WITHOUT
+                                            touching the label's sticky travel range */
+  overflow: hidden;
+}
+.home__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 1.2s cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+
+.home__view {
+  position: absolute;
+  right: var(--pad);
+  bottom: 18px;
+  color: #fff;
+  font-size: var(--fs-home-view);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+.home__item:hover .home__view {
+  opacity: 0.9;
+  transform: none;
+}
+
+/* -------------------------------------------------- project detail */
+.detail {
+  padding: 44px var(--pad) 0;
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+.detail__head {
+  font-size: var(--fs-detail-title);
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  padding-bottom: 22px;
+}
+.detail__head em {
+  font-style: normal;
+  display: block;
+}
+
+.detail__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 14px 0;
+  border-top: 1px solid var(--fg);
+  border-bottom: 1px solid var(--line);
+}
+.detail__meta > div {
+  flex: 1 1 140px;   /* present fields spread evenly, whatever the count */
+  min-width: 0;
+}
+.detail__meta dt {
+  font-weight: 500;
+  font-size: var(--fs-detail-meta-label);
+  margin-bottom: 3px;
+}
+.detail__meta dd {
+  font-size: var(--fs-detail-meta-value);
+  color: var(--sub);
+}
+
+.detail__desc {
+  text-justify: inline;
+  margin: 30px 0px 30px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--line-height);
+}
+/* richer Markdown-driven descriptions read better left-aligned */
+.detail__desc.is-md {
+  text-align: left;
+}
+
+/* ---- shared Markdown element styling (descriptions + bios) ---- */
+.detail__desc p,
+.home__intro-bio p,
+.info__bio p {
+  margin: 0 0 0.8em;
+}
+/* a blank line in the description markdown reads as a clear division */
+.detail__desc p { margin-bottom: 1.4em; }
+
+/* per-paragraph directives — prefix a paragraph with { … } in the markdown.
+   Placement: left / right / center   ·   Text: justify / indent
+   Size: small / large / xl           (combine freely, e.g. {right small}) */
+.detail__desc .md-left   { max-width: var(--md-col, 70%); margin-right: auto; }
+.detail__desc .md-right  { max-width: var(--md-col, 70%); margin-left: auto; }
+.detail__desc .md-center { max-width: 64ch; margin-left: auto; margin-right: auto; text-align: center; }
+.detail__desc .md-justify { text-align: justify; }
+.detail__desc .md-indent { text-indent: 2.5em; }
+.detail__desc .md-small  { font-size: 1em; }
+.detail__desc .md-large  { font-size: 1.4em; line-height: 1.15; }
+.detail__desc .md-xl     { font-size: 2em; line-height: 1.08; }
+
+.detail__desc p:last-child,
+.home__intro-bio p:last-child,
+.info__bio p:last-child {
+  margin-bottom: 0;
+}
+.detail__desc h3,
+.detail__desc h4,
+.home__intro-bio h3,
+.home__intro-bio h4,
+.info__bio h3,
+.info__bio h4 {
+  font-weight: 500;
+  margin: 1.1em 0 0.4em;
+}
+.detail__desc ul,
+.detail__desc ol,
+.home__intro-bio ul,
+.home__intro-bio ol,
+.info__bio ul,
+.info__bio ol {
+  margin: 0 0 0.8em;
+  padding-left: 1.2em;
+}
+.detail__desc a,
+.home__intro-bio a,
+.info__bio a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.detail__desc a:hover,
+.home__intro-bio a:hover,
+.info__bio a:hover {
+  opacity: 1;
+}
+.detail__desc code,
+.home__intro-bio code,
+.info__bio code {
+  font-family: monospace;
+  font-size: 0.92em;
+}
+
+.detail__videos {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+.detail__video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0a0a0a;
+}
+.detail__video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.detail__gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 60px;
+}
+/* image layout — shared by the gallery AND images interleaved in the description */
+.detail figure { margin: 0; }
+.detail figure img,
+.detail figure video {
+  width: 100%;
+  display: block;
+}
+.detail .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  align-items: center;   /* a shorter image is centred against a taller one, not top-aligned */
+}
+.detail__full { width: 100%; }   /* single / `full` image spans the whole page */
+/* per-image photography credit */
+.detail__credit {
+  font-size: var(--fs-card-meta);
+  color: var(--muted);
+  padding: 5px 0 2px;
+  text-align: left;
+}
+/* images interleaved inside the description get breathing room around the text */
+.detail__desc .row,
+.detail__desc .detail__full {
+  margin: 22px 0;
+}
+
+.detail__nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 22px 0 70px;
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-detail-nav);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.detail__nav .disabled {
+  color: var(--muted);
+  pointer-events: none;
+}
+
+/* -------------------------------------------------- works index (grid of previews) */
+.works {
+  padding: 46px var(--pad) 80px;
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+.works__group {
+  margin-bottom: 60px;
+}
+.works__group h2 {
+  font-size: var(--fs-section-heading);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding-bottom: 12px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--fg);
+}
+.works__group h2 sup {
+  font-size: 0.7em;
+  margin-left: 3px;
+  color: var(--muted);
+}
+
+.works__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px 24px;
+}
+
+.card {
+  display: block;
+}
+.card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 1s cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+.card:hover .card__media img {
+  transform: scale(1.04);
+}
+.card__view {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  color: #fff;
+  font-size: var(--fs-card-view);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+}
+.card:hover .card__view {
+  opacity: 0.95;
+  transform: none;
+}
+
+.card__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding: 10px 2px 0;
+}
+.card__title {
+  font-size: var(--fs-card-title);
+  font-weight: 400;
+}
+.card__title small {
+  display: block;
+  font-size: var(--fs-card-sub);
+  margin-top: 1px;
+}
+.card__meta {
+  flex: none;
+  text-align: right;
+  color: var(--sub);
+  font-size: var(--fs-card-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------- info / about */
+/* Info: hero row (portrait left, bio right — both vertically centred),
+   then full-width CV, Agenda and Press stacked below. */
+.info {
+  display: block;
+}
+
+.info__hero {
+  display: grid;
+  grid-template-columns: 50% 40% 1fr; /* portrait · bio · spacer */
+  align-items: center; /* both centred on the horizontal axis */
+  min-height: calc(100vh - var(--nav-h));
+}
+.info__media {
+  align-self: center;
+  height: 78vh;
+  overflow: hidden;
+  margin-left: 25%;
+}
+.info__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.info__intro {
+  align-self: center;
+  padding: 0 var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.info__stack {
+  padding: 0 var(--pad) 90px;
+}
+
+.info__bio {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--line-height);
+  text-align: justify;
+}
+
+.info__bio > p:first-child {
+  text-indent: var(--bio-indent);
+}
+
+.info__contact a {
+  display: block;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-bottom: 4px;
+}
+
+/* Agenda / Press sections (Markdown-driven) */
+.info__section {
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--fg);
+  margin-left: 10%;
+  width: 80%;
+}
+.info__section-title {
+  font-size: var(--fs-section-heading);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+  margin-top: 22px;
+}
+.info__md {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.4;
+}
+.info__md p {
+  margin: 0 0 0.7em;
+}
+.info__md p:last-child {
+  margin-bottom: 0;
+}
+.info__md ul,
+.info__md ol {
+  margin: 0 0 0.7em;
+  padding-left: 1.1em;
+}
+.info__md li {
+  margin-bottom: 0.35em;
+}
+.info__md a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.info__md a:hover {
+  opacity: 0.6;
+}
+
+/* ---- Calendar (Upcoming / Past, grouped) ---- */
+.cal__section {
+  font-size: var(--fs-section-heading) - 1px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 22px 0 6px;
+}
+.info__md .cal__section:first-child {
+  margin-top: 0;
+}
+.cal__sub {
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin: 12px 0 4px;
+}
+.info__md .cal__list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 16px;
+  margin: 0 0 4px;
+  padding: 0;
+  list-style: none;
+}
+.info__md .cal__list li {
+  display: contents;
+}
+.cal__date,
+.cal__event {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+}
+.cal__date {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---- Press (raw <a> links, with hover screenshot preview) ---- */
+.press__cat {
+  font-size: var(--fs-section-heading);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 22px 0 6px;
+}
+.info__md .press__list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.info__md .press__list li {
+  display: contents;
+}
+.press__date,
+.press__event {
+  padding: 5px 0;
+  border-bottom: 1px solid var(--line);
+}
+.press__date {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.info__md .press__list a {
+  text-decoration: none;
+}
+.info__md .press__list a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ---- CV (rendered from cv.json) ---- */
+.cv__body {
+  position: relative;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+}
+.cv__pdf {
+  float: right;
+  margin-top: -46px; /* sit up next to the "Curriculum Vitae" heading */
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.cv__pdf:hover {
+  color: var(--accent);
+}
+
+/* horizontal timeline — single axis line with tick connectors to each milestone */
+.cv-tl-wrap {
+  overflow-x: auto;
+  margin: 10px 0 44px;
+  -webkit-overflow-scrolling: touch;
+}
+.cv-tl {
+  min-width: 560px;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+.cv-tl-above,
+.cv-tl-axis,
+.cv-tl-below {
+  display: flex;
+}
+.cv-tl-above .tl-cell {
+  flex: 1;
+  padding: 0 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 72px;
+}
+.cv-tl-above .tl-filled::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 16px;
+  background: var(--fg);
+  margin: 8px auto 0;
+}
+.cv-tl-axis {
+  align-items: flex-end;
+  border-bottom: 1px solid var(--fg);
+}
+.tl-yr {
+  flex: 1;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 300;
+  padding-bottom: 8px;
+  white-space: nowrap;
+}
+.cv-tl-below .tl-cell {
+  flex: 1;
+  padding: 0 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 72px;
+}
+.cv-tl-below .tl-filled::before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 16px;
+  background: var(--fg);
+  margin: 0 auto 8px;
+}
+.tl-cell b { font-weight: 500; }
+.tl-cell span {
+  display: block;
+  color: var(--sub);
+  font-size: 0.85em;
+  margin-top: 3px;
+}
+
+.cv__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px 48px;
+}
+.cv__block-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--fg);
+}
+.cv__entry {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.cv__entry-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+.cv__entry-title {
+  font-weight: 500;
+}
+.cv__entry-date {
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.cv__entry-sub {
+  color: var(--sub);
+}
+.cv__entry-venue {
+  color: var(--muted);
+  font-style: italic;
+}
+.cv__toolkit {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 16px;
+  row-gap: 6px;
+}
+.cv__toolkit dt {
+  font-weight: 500;
+}
+
+#preview-popup {
+  position: fixed;
+  z-index: 200;
+  display: none;
+  width: 300px;
+  max-width: 40vw;
+  pointer-events: none;
+  background: #0a0a0a;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+#preview-popup img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* -------------------------------------------------- transitions */
+.view {
+  animation: fade 0.5s ease both;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* -------------------------------------------------- responsive */
+@media (max-width: 1100px) {
+  .works__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 820px) {
+  :root {
+    --pad: 16px;
+  }
+
+  /* mobile: a solid white nav bar with dark text (no inversion over content) */
+  .nav {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-h);
+    background: var(--bg);
+    z-index: 99;
+  }
+  .nav__brand,
+  .nav__toggle {
+    color: var(--fg);
+    mix-blend-mode: normal;
+  }
+
+  /* brand back to the edge; nav column becomes a full-width dropdown panel */
+  .nav__brand {
+    left: var(--pad);
+  }
+
+  .nav__right {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--nav-h);
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    padding: 0 var(--pad);
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.35s ease,
+      padding 0.35s ease;
+    /* dropdown panel is on solid white — no inversion here */
+    color: var(--fg);
+    mix-blend-mode: normal;
+  }
+  .nav.is-open .nav__right {
+    max-height: 320px;
+    padding: 6px var(--pad) 12px;
+  }
+  .nav__links a {
+    padding: 12px 0;
+    font-size: var(--fs-nav-mobile);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__social {
+    flex-direction: row;
+    gap: 6px;
+    padding: 12px 0 2px;
+    font-size: var(--fs-nav-mobile);
+  }
+  .nav__toggle {
+    display: flex;
+  }
+
+  .home {
+    grid-template-columns: 1fr;
+  }
+  .home__intro {
+    order: 0;
+    position: static;
+    min-height: 0;
+    padding: 22px var(--pad) 26px;
+    border-bottom: 1px solid var(--line);
+  }
+  .home__stack {
+    order: 1;
+    margin-top: 0;
+  } /* no pull-up under the header on mobile */
+  .home__sticky {
+    top: calc(var(--nav-h) + 18px);
+  } /* a bit of gap below the white bar */
+  .home__sticky-title { max-width: none; }  /* title sits below the bar, not beside the brand */
+  .home__media {
+    height: 74vh;
+  }
+
+  .detail__meta {
+    gap: 16px;
+  }
+  .detail__meta > div {
+    flex-basis: 40%;   /* ~2 per row on mobile */
+  }
+  .detail__desc {
+    text-align: left;
+    margin: 26px 0;
+  }
+  /* placed paragraphs go full-width on mobile */
+  .detail__desc .md-left,
+  .detail__desc .md-right,
+  .detail__desc .md-center {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
+  .detail .row {
+    grid-template-columns: 1fr;
+  }
+
+  .works__grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .info__hero {
+    grid-template-columns: 1fr; /* stack portrait over bio */
+    min-height: 0;
+    gap: 22px;
+    padding: 8px 0 24px;
+  }
+  .info__media {
+    height: 62vh;
+  }
+  .info__intro {
+    padding: 0 var(--pad);
+  }
+
+  .cv__cols {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .cv__pdf {
+    float: none;
+    display: inline-block;
+    margin: 0 0 12px;
+  }
+  .detail__desc .md-large  { font-size: 1em; line-height: 1.15; }
+}
+
+@media (hover: none) {
+  .home__item:hover .home__media img {
+    transform: none;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "timeline": [
+    { "year": "2020", "above": "BA Visual Communication Design", "aboveSub": "IED, Turin", "below": null, "belowSub": null },
+    { "year": "2020", "above": null, "aboveSub": null, "below": "Arc's Design Agency", "belowSub": "Turin" },
+    { "year": "Jan 2022", "above": null, "aboveSub": null, "below": "Brandsider", "belowSub": "Cuneo" },
+    { "year": "Jun 2022", "above": null, "aboveSub": null, "below": "University of Pollenzo", "belowSub": "Pollenzo" },
+    { "year": "2024", "above": null, "aboveSub": null, "below": "Nova Media Studio", "belowSub": "Co-Founder" },
+    { "year": "2025", "above": "Seminaria Residency", "aboveSub": "Maranola, Formia", "below": null, "belowSub": null },
+    { "year": "2026", "above": null, "aboveSub": null, "below": "Sincronia <br> Fort Jesus", "belowSub": "Mombasa, Kenya" }
+  ],
+  "education": [
+    { "title": "BA Visual Communication Design", "date": "2017 – 2020", "sub": "IED Torino" },
+    { "title": "Artistic High School", "date": "2012 – 2017", "sub": "Liceo Artistico Ego Bianchi, Cuneo" }
+  ],
+  "experience": [
+    { "title": "Co-founder & New Media Artist · Nova Media Studio", "date": "2024 – present", "sub": "Turin, IT" },
+    { "title": "Live Visuals & AV Performances", "date": "2022 – present", "sub": "Artico Festival · Club2Club · Seminaria Sogni in Terra · OGR · GAM" },
+    { "title": "Graphic Designer · University of Pollenzo", "date": "2022 - present", "sub": "Pollenzo, IT" },
+    { "title": "Graphic Designer · Brandsider", "date": "2022", "sub": "Cuneo, IT" },
+    { "title": "Junior Graphic Designer · Arc's Design Agency", "date": "2020 – 2021", "sub": "Turin, IT" }
+  ],
+  "publications": [],
+  "toolkit": {
+    "Tools": "TouchDesigner · Resolume Arena · Adobe Creative Suite · Figma",
+    "Skills": "Real-time Visuals · Live Performance · Video Mapping · Graphic Design · Visual Design · Art Direction · Illustration",
+    "Languages": "Italian (native) · English"
+  },
+  "pdf": "content/cv_federica.pdf"
+}

@@ -17,6 +17,36 @@
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
+
+  /* Escape, then hand back a small, safe subset of inline HTML, so hand-written
+     fields in projects.json can carry links and light emphasis:
+       "role": "Visual Design <a href='https://novamediastudio.co/'>NOVA Media Studio</a>"
+     Only <a>, <br>, <em>, <i>, <strong>, <b> survive, an <a> keeps nothing but a
+     safe href (http, https, mailto, / or #), and every other tag stays visible
+     as text — so a stray "<" in a title still can't turn into markup. */
+  var RICH_TAGS = /&lt;(\/?)(a|br|em|i|strong|b)\b([\s\S]*?)&gt;/gi;
+  function escRich(s) {
+    return esc(s).replace(RICH_TAGS, function (m, close, tag, attrs) {
+      tag = tag.toLowerCase();
+      if (close) return "</" + tag + ">";
+      if (tag === "br") return "<br>";
+      if (tag !== "a") return "<" + tag + ">";
+      var hm = String(attrs || "").match(/href\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s]+))/i);
+      var url = (hm ? (hm[1] != null ? hm[1] : hm[2] != null ? hm[2] : hm[3]) : "").trim();
+      // &amp; is how esc() left a query string's "&" — decode only for the check
+      // an unsafe target (javascript:, data:…) drops the href but keeps the tag
+      // balanced, so the matching </a> never ends up orphaned in the output
+      if (!/^(?:https?:\/\/|mailto:|\/|#)/i.test(url.replace(/&amp;/g, "&"))) return "<a>";
+      return '<a href="' + url.replace(/"/g, "%22") + '" target="_blank" rel="noopener">';
+    });
+  }
+  // Role: break onto a new line at "@" (e.g. "Graphic Designer @ Studio"),
+  // but only in the text — never inside a link's href.
+  function richWithAtBreaks(s) {
+    return escRich(s).split(/(<[^>]*>)/).map(function (seg, i) {
+      return i % 2 ? seg : seg.replace(/\s*@/g, "<br>@");
+    }).join("");
+  }
   // A work is "selected" (homepage + Selected Works group) when selected:true.
   // Legacy: indexType:"selected" still counts, so old data keeps working.
   function isSelected(p) { return p.selected === true || p.indexType === "selected"; }
@@ -71,11 +101,63 @@
   /* ---- gallery image helpers (shared by project galleries + markdown image blocks) ----
      An image entry is a "path" string or { src, credit, full, alt }. */
   function normImg(x) { return typeof x === "string" ? { src: x } : (x || {}); }
+  function isVideoSrc(src) { return /\.(mp4|webm|ogv|ogg|mov|m4v)(\?.*)?$/i.test(String(src || "")); }
   function galMedia(im) {
     var src = im.src || im.image || "";
-    if (/\.(mp4|webm|ogg|mov)$/i.test(src))
-      return '<video src="' + esc(src) + '" controls playsinline preload="metadata"></video>';
+    if (isVideoSrc(src))
+      // muted + looping; enhanceVideos() starts it when it scrolls into view
+      return '<video src="' + esc(src) + '"' +
+        (im.poster ? ' poster="' + esc(im.poster) + '"' : '') +
+        ' autoplay loop muted playsinline preload="metadata"' +
+        ' data-autoplay></video>';
     return '<img src="' + esc(src) + '" alt="' + esc(im.alt || "") + '" loading="lazy"/>';
+  }
+
+  /* A cover / thumbnail. A video cover (.mp4, .webm, .mov…) loops silently in
+     place of the image — better quality than a GIF at a fraction of the weight.
+     An optional `coverPoster` still image shows while it loads. */
+  function thumbMedia(src, alt, poster) {
+    if (isVideoSrc(src))
+      return '<video class="thumb-video" src="' + esc(src) + '"' +
+        (poster ? ' poster="' + esc(poster) + '"' : '') +
+        ' autoplay loop muted playsinline preload="metadata"' +
+        ' aria-label="' + esc(alt || "") + '" data-autoplay></video>';
+    return '<img src="' + esc(src) + '" alt="' + esc(alt || "") + '" loading="lazy" />';
+  }
+
+  /* Local <video> playback: muted and looping, started when the clip scrolls
+     into view and paused when it leaves, so a long page never has a dozen
+     videos competing for bandwidth. Gallery clips reveal their controls on
+     hover; on touch screens, where there is no hover, they stay visible. */
+  var vidObserver = null;
+  var canHover = !(window.matchMedia && window.matchMedia("(hover: none)").matches);
+  function enhanceVideos(root) {
+    var vids = root.querySelectorAll("video[data-autoplay]");
+    if (!vids.length) return;
+    var play = function (v) { var r = v.play(); if (r && r.catch) r.catch(function () {}); };
+    if (window.IntersectionObserver && !vidObserver) {
+      vidObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!document.contains(e.target)) { vidObserver.unobserve(e.target); return; }
+          if (e.isIntersecting) play(e.target); else e.target.pause();
+        });
+      }, { rootMargin: "200px 0px", threshold: 0.01 });
+    }
+    Array.prototype.forEach.call(vids, function (v) {
+      if (v.getAttribute("data-enhanced")) return;
+      v.setAttribute("data-enhanced", "1");
+      v.muted = true;            // as a property too — some browsers need it to autoplay
+      v.loop = true;
+      v.playsInline = true;
+      if (v.hasAttribute("data-hover-controls")) {
+        if (!canHover) v.controls = true;
+        else {
+          v.addEventListener("mouseenter", function () { v.controls = true; });
+          v.addEventListener("mouseleave", function () { v.controls = false; });
+        }
+      }
+      if (vidObserver) vidObserver.observe(v); else play(v);
+    });
   }
   function galFig(im) {
     return '<figure class="detail__fig">' + galMedia(im) +
@@ -154,7 +236,7 @@
         .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
         .then(function (txt) {
           var html = mdToHtml(txt);
-          if (html) { el.innerHTML = html; el.classList.add("is-md"); }
+          if (html) { el.innerHTML = html; el.classList.add("is-md"); enhanceVideos(el); }
         })
         .catch(function () { /* keep the JSON fallback already in the element */ });
     });
@@ -369,7 +451,7 @@
             '<span class="home__sticky-cat">' + esc((p.medium || "").toUpperCase()) + '</span>' +
           '</div>' +
           '<a class="home__media" href="#/project/' + p.id + '" data-link>' +
-            '<img src="' + esc(p.cover) + '" alt="' + esc(p.title) + '" loading="lazy" />' +
+            thumbMedia(p.cover, p.title, p.coverPoster) +
             '<span class="home__view">View →</span>' +
           '</a>' +
         '</article>'
@@ -416,11 +498,11 @@
     var addMeta = function (label, value, isHtml) {
       if (value) metaItems.push("<div><dt>" + esc(label) + "</dt><dd>" + (isHtml ? value : esc(value)) + "</dd></div>");
     };
-    addMeta("Medium", p.medium);
-    // Role: break onto a new line at "@" (e.g. "Graphic Designer @ Studio")
-    addMeta("Role", p.role ? esc(p.role).replace(/\s*@/g, "<br>@") : "", true);
+    // Medium / Role / Deliverables are hand-written, so they may carry links
+    addMeta("Medium", p.medium ? escRich(p.medium) : "", true);
+    addMeta("Role", p.role ? richWithAtBreaks(p.role) : "", true);
     addMeta("Year", p.year);
-    addMeta("Deliverables", p.deliverables);
+    addMeta("Deliverables", p.deliverables ? escRich(p.deliverables) : "", true);
     var clientName = p.client || p.agency;          // `client` (or legacy `agency`)
     if (clientName) {
       var clientUrl = p.clientUrl || p.agencyUrl;
@@ -452,14 +534,16 @@
     var thumb = p.cover || (p.images && p.images[0]) || "";
     return (
       '<a class="card" href="#/project/' + p.id + '" data-link>' +
-        '<div class="card__media"><img src="' + esc(thumb) + '" alt="' + esc(p.title) + '" loading="lazy" />' +
+        '<div class="card__media">' + thumbMedia(thumb, p.title, p.coverPoster) +
           '<span class="card__view">View →</span>' +
         '</div>' +
         '<div class="card__info">' +
           '<span class="card__title">' + esc(p.title) +
             (p.subtitle ? '<small>' + esc(p.subtitle) + '</small>' : '') +
           '</span>' +
-          '<span class="card__meta">' + esc(p.medium || "") + (p.year ? ' — ' + esc(p.year) : '') + '</span>' +
+          // year sits on the title's line, hard right; the medium goes below
+          (p.year ? '<span class="card__year">' + esc(p.year) + '</span>' : '') +
+          (p.medium ? '<span class="card__meta">' + esc(p.medium) + '</span>' : '') +
         '</div>' +
       '</a>'
     );
@@ -544,6 +628,7 @@
     app.innerHTML = html;
     hydrateMarkdown(app);
     hydrateSections(app);
+    enhanceVideos(app);
     setActive(route);
     closeMenu();
     window.scrollTo(0, 0);

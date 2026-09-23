@@ -3,8 +3,8 @@
 :root {
   --bg: #ffffff;
   --fg: #111111;
-  --accent: #8a8a8a;
-  --muted: #8a8a8a;
+  --accent: #8fbc8f;
+  --muted: #8fbc8f;
   --sub: #666666;
   --line: #e2e2e2;
   --nav-h: 44px;
@@ -237,7 +237,7 @@ strong {
 /* -------------------------------------------------- home: split (works left, bio right) */
 .home {
   display: grid;
-  grid-template-columns: var(--home-left) 1fr; /* left edge of col 2 == start of right-nav */
+  grid-template-columns: var(--home-left) minmax(0, 1fr); /* left edge of col 2 == start of right-nav */
   align-items: start;
   /* landing: everything sits a margin below the header; this whitespace simply
      scrolls away, after which each 100vh image fills the page under the header */
@@ -329,12 +329,18 @@ strong {
                                             touching the label's sticky travel range */
   overflow: hidden;
 }
-.home__media img {
+.home__media img,
+.home__media video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 1.2s cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+/* a cover video is decoration inside a link — let the click reach the <a> */
+.thumb-video {
+  pointer-events: none;
+  background: #0a0a0a;
 }
 
 .home__view {
@@ -396,6 +402,15 @@ strong {
 .detail__meta dd {
   font-size: var(--fs-detail-meta-value);
   color: var(--sub);
+}
+
+.detail__meta a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.detail__meta a:hover {
+  color: var(--accent);
 }
 
 .detail__desc {
@@ -501,15 +516,19 @@ strong {
   padding-bottom: 60px;
 }
 /* image layout — shared by the gallery AND images interleaved in the description */
-.detail figure { margin: 0; }
+.detail figure { margin: 0; min-width: 0; }
 .detail figure img,
 .detail figure video {
   width: 100%;
   display: block;
 }
+.detail figure video {
+  background: #0a0a0a;
+}
 .detail .row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* minmax(0,…): a video's intrinsic width must not widen the column */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 4px;
   align-items: center;   /* a shorter image is centred against a taller one, not top-aligned */
 }
@@ -567,12 +586,16 @@ strong {
 
 .works__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* minmax(0,…) rather than 1fr: a video cover reports its full intrinsic
+     width (1920px) as a minimum size, which would stretch its column and
+     squeeze the others. This keeps every card the same width. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 30px 24px;
 }
 
 .card {
   display: block;
+  min-width: 0;        /* same reason — the card may not outgrow its column */
 }
 .card__media {
   position: relative;
@@ -580,14 +603,16 @@ strong {
   overflow: hidden;
   background: #0a0a0a;
 }
-.card__media img {
+.card__media img,
+.card__media video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 1s cubic-bezier(0.16, 0.84, 0.44, 1);
 }
-.card:hover .card__media img {
+.card:hover .card__media img,
+.card:hover .card__media video {
   transform: scale(1.04);
 }
 .card__view {
@@ -610,14 +635,19 @@ strong {
   transform: none;
 }
 
+/* Two rows: title (+ subtitle) with the year hard right on the title's
+   baseline, then the medium on its own line underneath. */
 .card__info {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
-  gap: 14px;
+  gap: 8px 14px;
   padding: 10px 2px 0;
 }
 .card__title {
+  flex: 1 1 auto;
+  min-width: 0;
   font-size: var(--fs-card-title);
   font-weight: 400;
 }
@@ -626,14 +656,20 @@ strong {
   font-size: var(--fs-card-sub);
   margin-top: 1px;
 }
-.card__meta {
+.card__year {
   flex: none;
   text-align: right;
   color: var(--sub);
   font-size: var(--fs-card-meta);
-  text-transform: uppercase;
   letter-spacing: 0.03em;
   white-space: nowrap;
+}
+.card__meta {
+  flex: 0 0 100%;      /* always the full width of its own line */
+  color: var(--sub);
+  font-size: var(--fs-card-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 /* -------------------------------------------------- info / about */
@@ -978,7 +1014,7 @@ strong {
 /* -------------------------------------------------- responsive */
 @media (max-width: 1100px) {
   .works__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -1126,7 +1162,8 @@ strong {
 }
 
 @media (hover: none) {
-  .home__item:hover .home__media img {
+  .home__item:hover .home__media img,
+  .home__item:hover .home__media video {
     transform: none;
   }
 }

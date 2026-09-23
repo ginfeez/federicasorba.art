@@ -2,12 +2,12 @@
 Developed through [Nova Media Studio](https://novamediastudio.co)
 Fort Jesus in Mombasa, Kenya — a UNESCO World Heritage Site — is one of the most compelling symbols of cultural intersection on the East African coast. For centuries its stone walls have absorbed the traces of the many civilizations that passed through Mombasa: the Swahili, the Portuguese, the Omani, the British. It is a place where history is literally written into architecture, and it was this quality — the fort as a living palimpsest of encounters — that made it such a powerful space to work in.
 
-![](assets/img/sincronia/sincronia_1.jpg)
+![](assets/img/sincronia/sincronia_1.webp)
 
 {right} We were invited by the Italian Institute of Culture in Nairobi and the Embassy of Italy in Kenya to create a video mapping on the fort's ancient walls — an immersive work that brought together music, imagery, architecture, and research. The projection followed the contours of the structure, animating the coral stone with flowing organic forms and layered visual textures drawn from the culture and landscape of the Swahili coast. Rather than imposing a narrative onto the stone, the work sought to draw out what was already latent within it — the memory, identity, and accumulated history of a place that has always stood at the crossroads of worlds.
 
-![](assets/img/sincronia/sincronia_2.jpg)
-![](assets/img/sincronia/sincronia_3.jpg)
+![](assets/img/sincronia/sincronia_2.webp)
+![](assets/img/sincronia/sincronia_3.webp)
 ![](assets/img/sincronia/sincronia_9.mp4)
 
 {left large} Alongside the video mapping, we had the honor of presenting a live performance in collaboration with Juma Tutu, the Kenyan musician and leader of the Swahili Jazz band, whose music is deeply rooted in the traditions of the East African coast. Juma guided us through or explorations made of listening and learning — introducing us to local instruments, rhythms, and the sonic imagination of Mombasa. This dialogue shaped not only the music but the entire sensibility of the work.
@@ -21,8 +21,8 @@ Fort Jesus in Mombasa, Kenya — a UNESCO World Heritage Site — is one of the 
 
 Curated by Isabella Indolfi, the project continues a line of site-specific research that also informed our contribution to the 2025 Seminaria Sogninterra Public Art Biennale. In returning to Fort Jesus, the work pays tribute both to the fort itself and to the legacy of Cairati — a reminder that the dialogue between Italy and East Africa has deep and enduring roots.
 
-![](assets/img/sincronia/sincronia_6.jpg)
-![](assets/img/sincronia/sincronia_5.jpg)
+![](assets/img/sincronia/sincronia_6.webp)
+![](assets/img/sincronia/sincronia_5.webp)
 
 
 {left large} **Related News**

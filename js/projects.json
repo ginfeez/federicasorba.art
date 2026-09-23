@@ -2,7 +2,7 @@
     "profile": {
         "name": "Federica Sorba",
         "cv": "#",
-        "email": "hello@federicasorba.art",
+        "email": "federicasorba@gmail.com",
         "instagram": "https://www.instagram.com/federicasorba/",
         "linkedin": "https://www.linkedin.com/in/federica-sorba-82b40a173/",
         "instagramHandle": "@federicasorba",
@@ -291,17 +291,14 @@
             "indexType": "visual design",
             "selected": true,
             "index": 4,
-            "medium": "3-days workshop lessons",
+            "medium": "Live Visual Design",
             "role": "Visual design <a href='https://novamediastudio.co/'>NOVA Media Studio</a> ",
             "agency": "Recontemporary",
             "agencyUrl": "https://novamediastudio.co/",
             "year": "2025",
             "deliverables": "Visual Design, Projection Mapping, Installation and Performance",
             "descriptionFile": "content/artico.md",
-            "cover": "assets/img/workshop_rec/novamedia_workshop_cover.gif",
-            "videos": [
-                "https://www.youtube.com/watch?v=y6EuJrFFnlQ"
-            ]
+            "cover": "assets/img/artico/artico_12.mp4"
         },
         {
             "id": "schwarze-materie",
@@ -315,24 +312,6 @@
             "deliverables": "An ongoing series of small generative sketches",
             "description": "Field Notes is an open-ended series of small generative studies — daily experiments with form, motion and randomness. Each sketch is a note to self, a way of thinking through a technique or an image before it grows into something larger.",
             "cover": "assets/img/schwarze_materie/schwarze_materie_cover.gif"
-        },
-        {
-            "id": "night-forms",
-            "title": "Night Forms",
-            "subtitle": "Studies in Light",
-            "indexType": "explorations",
-            "medium": "Real-time Graphics",
-            "role": "Author",
-            "year": "2024",
-            "deliverables": "A collection of real-time shaders and light studies",
-            "description": "Night Forms collects real-time experiments with light, colour and depth. Built as shaders that run live in the browser, the studies explore how simple rules can produce atmospheres — dusk, glow, drift — that feel almost photographic.",
-            "cover": "assets/img/night-forms-cover.svg",
-            "images": [
-                "assets/img/night-forms-1.svg",
-                "assets/img/night-forms-2.svg",
-                "assets/img/night-forms-3.svg",
-                "assets/img/night-forms-4.svg"
-            ]
         }
     ]
 }

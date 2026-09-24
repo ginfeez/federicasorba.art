@@ -22,7 +22,7 @@
             "index": 5,
             "medium": "Live AV Installation and Performance",
             "role": "Visual design <a href='https://novamediastudio.co/'>NOVA Media Studio</a> ",
-            "agency": "Nova Media Studio",
+            "agency": "Seminaria Sogninterra",
             "agencyUrl": "https://novamediastudio.co/",
             "year": "2025",
             "deliverables": "Visual Design, Projection Mapping, Installation and Performance",
@@ -211,7 +211,7 @@
         {
             "id": "sincronia",
             "title": "Sincronia",
-            "subtitle": "Seminaria Sogni in Terra - Land Art Biennale",
+            "subtitle": "A projection mapping in Kenya",
             "indexType": "visual design",
             "selected": true,
             "index": 1,
@@ -241,10 +241,7 @@
             "year": "2024",
             "deliverables": "Visual Design, Projection Mapping, Installation and Performance",
             "descriptionFile": "content/venaria.md",
-            "cover": "assets/img/venaria/novamedia_venaria_cover.gif",
-            "videos": [
-                "https://www.youtube.com/watch?v=4F41CLEMr04"
-            ]
+            "cover": "assets/img/venaria/novamedia_venaria_cover.gif"
         },
         {
             "id": "ogr",
